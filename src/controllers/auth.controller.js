@@ -33,7 +33,8 @@ async function userRegisterConroller(req, res){
       _id:user._id,
       email:user.email,
       name:user.name
-    }
+    },
+    token
   })
 }
 
