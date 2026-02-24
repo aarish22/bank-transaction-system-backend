@@ -5,8 +5,7 @@ const jwt = require("jsonwebtoken");
 
 /** 
 * user registration controller
-* @route POST /api/auth/register
-* @access Public  
+* @route POST /api/auth/register 
 */
 async function userRegisterConroller(req, res){
   const {email, name, password} = req.body
@@ -17,16 +16,12 @@ async function userRegisterConroller(req, res){
   if(isExists){
     return res.status(400).json({message: "User already exists"});
   }
-
-
-
-
   const user = await userModel.create({
     email,password, name
   })
 
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-  res.cookies("token", token)
+  res.cookie("token", token)
 
   res.status(201).json({
     user:{
@@ -38,6 +33,20 @@ async function userRegisterConroller(req, res){
   })
 }
 
+/** 
+ * - User Login Controller
+ * - @route POST /api/auth/login
+ * - @access Public
+ * - @description This controller handles user login by validating the provided email and password. If the credentials are valid, it generates a JWT token and sends it back to the client in a cookie and in the response body.
+*/
+
+async function userLoginController(req,res){
+  const {email, password} = req.body;
+
+  
+
+
+}
 
 
 module.exports = {

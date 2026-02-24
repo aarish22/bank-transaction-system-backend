@@ -31,7 +31,7 @@ userSchema.pre('save', async function(next){
 
   const hash = await bcrypt.hash(this.password, 10);
   this.password = hash; // Hash the password before saving to the database
-  return next();
+  return;
 })
 
 
