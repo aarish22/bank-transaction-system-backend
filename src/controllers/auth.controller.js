@@ -2,7 +2,7 @@
 
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
-
+const emailService = require("../services/email.services");
 /** 
 * user registration controller
 * @route POST /api/auth/register 
@@ -31,7 +31,10 @@ async function userRegisterConroller(req, res){
     },
     token
   })
+  await emailService.sendRegistrationEmail(user.email, user.name) // Send a registration email to the user after successful registration
 }
+
+
 
 /** 
  * - User Login Controller
@@ -43,12 +46,34 @@ async function userRegisterConroller(req, res){
 async function userLoginController(req,res){
   const {email, password} = req.body;
 
-  
+  const user = await userModel.findOne({email}).select("+password") // Find the user by email and include the password field in the query result
+
+  if (!user){
+    return res.status(401).json({message: "Invalid email or password"});
+  }
+
+  const isValidPassword = await user.comparePassword(password)
+  if(!isValidPassword){
+    return res.status(401).json({message: "Invalid email or password"});
+  }
+
+  const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, { expiresIn: "1d" });
+  res.cookie("token", token,) // Send the JWT token back to the client in a cookie
+
+  res.status(200).json({
+    user:{
+      _id:user._id,
+      email:user.email,
+      name:user.name
+    },
+    token
+  })
+
 
 
 }
 
 
 module.exports = {
-  userRegisterConroller
+  userRegisterConroller, userLoginController
 };
