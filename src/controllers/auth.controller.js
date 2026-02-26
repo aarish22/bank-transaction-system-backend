@@ -2,7 +2,7 @@
 
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
-const emailService = require("../services/email.services");
+const emailService = require("../services/email.services");  // not functional now due to api key issues
 /** 
 * user registration controller
 * @route POST /api/auth/register 
