@@ -2,7 +2,7 @@
 
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
-const emailService = require("../services/email.services");  // not functional now due to api key issues
+//const emailService = require("../services/email.services");  // not functional now due to api key issues
 /** 
 * user registration controller
 * @route POST /api/auth/register 
@@ -31,7 +31,7 @@ async function userRegisterConroller(req, res){
     },
     token
   })
-  await emailService.sendRegistrationEmail(user.email, user.name) // Send a registration email to the user after successful registration
+  //await emailService.sendRegistrationEmail(user.email, user.name) // Send a registration email to the user after successful registration
 }
 
 
