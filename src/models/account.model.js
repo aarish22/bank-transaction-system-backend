@@ -10,13 +10,14 @@ const accountSchema = new mongoose.Schema({
   status: {
     enum: {
       values: ["active", "inactive", "suspended"], // Define the allowed values for the status field
-      message: "Status must be either active, inactive, or suspended" // Custom error message for invalid status values
+      message: "Status must be either active, inactive, or suspended" ,// Custom error message for invalid status values
+      default: "active" // Set the default value for the status field to "active"
     }
   }, 
     currency: {
       type: String,
       required: [true, "Currency is required"] ,// Ensure that the currency field is required  
-      default: "USD" // Set the default value for the currency field to "USD"
+      default: "INR" // Set the default value for the currency field to "INR"
     }
   },
     {
