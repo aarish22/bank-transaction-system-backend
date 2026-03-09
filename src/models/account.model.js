@@ -4,7 +4,8 @@ const accountSchema = new mongoose.Schema({
   user:{
     type: mongoose.Schema.Types.ObjectId, // Reference to the User model
     ref: "User",
-    required: [true, "User reference is required"] // Ensure that the user field is required
+    required: [true, "User reference is required"], // Ensure that the user field is required
+    index: true // Create an index on the user field for faster queries
   },
   status: {
     enum: {
@@ -23,6 +24,7 @@ const accountSchema = new mongoose.Schema({
   }
 )
 
+accountSchema.index({ user: 1 , status: 1}) // create a compound index on the user and status fields for faster queries that filter by both fields
 const accountModel = mongoose.model("Account", accountSchema)
 
 module.exports = accountModel;
