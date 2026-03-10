@@ -1,6 +1,16 @@
 const accountModel = require('../models/account.model');
 
-async function createAccount(req, res){
-  const { accountType, initialDeposit } = req.body;
-  const userId = req.user._id; // Get the authenticated user's ID from the request object 
+async function createAccountController(req, res){
+
+  const user = req.user; // Get the authenticated user from the request object
+
+  const account = await accountModel.create({
+    user: user._id, // Associate the new account with the authenticated user's ID
+  })
+
+  res.status(201).json({account}) // Send the created account details back in the response
+}
+
+module.exports = {
+  createAccountController,
 }
