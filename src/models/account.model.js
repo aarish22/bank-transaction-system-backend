@@ -8,11 +8,13 @@ const accountSchema = new mongoose.Schema({
     index: true // Create an index on the user field for faster queries
   },
   status: {
+    type: String,
     enum: {
       values: ["active", "inactive", "suspended"], // Define the allowed values for the status field
       message: "Status must be either active, inactive, or suspended" ,// Custom error message for invalid status values
-      default: "active" // Set the default value for the status field to "active"
-    }
+      
+    },
+    default: "active" // Set the default value for the status field to "active"
   }, 
     currency: {
       type: String,

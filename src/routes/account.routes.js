@@ -1,5 +1,7 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth.middleware');
+const accountController = require('../controllers/account.controller');
+
 
 const router = express.Router();
 
@@ -8,10 +10,7 @@ const router = express.Router();
  * - @access Private
  * - @description This route allows authenticated users to create a new bank account. The request body should include the account type (e.g., "savings" or "checking") and an optional initial deposit amount. The route handler will validate the input, create a new account associated with the authenticated user, and return the account details in the response.
  */
-router.post("/create", authMiddleware.authMiddleware, async (req, res) => {
-  const { accountType, initialDeposit } = req.body;
-})
-
+router.post("/create", authMiddleware.authMiddleware, accountController.createAccountController)
 
 
 module.exports = router
