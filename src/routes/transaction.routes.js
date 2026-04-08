@@ -4,6 +4,9 @@ const authMiddleware = require('../middlewares/auth.middleware')
 const transactionRoutes = Router();
 
 
-transactionRoutes.post("/")
+
+
+
+transactionRoutes.post("/", authMiddleware.authMiddleware)
 
 module.exports = transactionRoutes;
