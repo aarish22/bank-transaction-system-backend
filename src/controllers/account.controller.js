@@ -1,3 +1,5 @@
+// controllers/account.controller.js
+
 const accountModel = require('../models/account.model');
 
 async function createAccountController(req, res){
