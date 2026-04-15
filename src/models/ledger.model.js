@@ -1,3 +1,5 @@
+// Import the mongoose library to define the schema and model for the Ledger collection
+
 const mongoose = require('mongoose');
 
 const ledgerSchema = new mongoose.Schema({
