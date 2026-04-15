@@ -1,3 +1,4 @@
+// Import the mongoose library to define the schema and model for the Transaction collection
 const mongoose = require('mongoose');
 
 
