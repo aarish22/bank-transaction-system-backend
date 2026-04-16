@@ -1,3 +1,5 @@
+// The email.services.js file is responsible for sending emails to users. It uses the nodemailer package to send emails through a Gmail account. The transporter object is created with the necessary configuration for the email service and authentication details. The sendEmail function is defined to send an email with the specified recipient, subject, text, and HTML content. Additionally, there are specific functions for sending registration emails, transaction alert emails, and transaction failure alert emails, which utilize the sendEmail function to send the appropriate messages to users.
+
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
